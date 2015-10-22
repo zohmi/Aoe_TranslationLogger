@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Aoe_TranslationLogger>
+            <version>0.0.1</version>
+        </Aoe_TranslationLogger>
+    </modules>
+</config>

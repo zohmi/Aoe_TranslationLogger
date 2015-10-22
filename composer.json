@@ -1,0 +1,10 @@
+{
+  "name": "aoepeople/aoe_translationlogger",
+  "description": "Logs translation keys and current translations",
+  "homepage": "http://www.aoe.com",
+  "license": "MIT",
+  "type": "magento-module",
+  "require": {
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}
