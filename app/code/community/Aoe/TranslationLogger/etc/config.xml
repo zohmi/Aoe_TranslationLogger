@@ -5,4 +5,37 @@
             <version>0.0.1</version>
         </Aoe_TranslationLogger>
     </modules>
+    <global>
+        <helpers>
+            <aoe_translationlogger>
+                <class>Aoe_TranslationLogger_Helper</class>
+            </aoe_translationlogger>
+        </helpers>
+        <models>
+            <aoe_translationlogger>
+                <class>Aoe_TranslationLogger_Model</class>
+                <resourceModel>aoe_translationlogger_resource</resourceModel>
+            </aoe_translationlogger>
+            <aoe_translationlogger_resource>
+                <class>Aoe_TranslationLogger_Model_Resource</class>
+                <entities>
+                    <translation_logging>
+                        <table>aoe_translation_logging</table>
+                    </translation_logging>
+                </entities>
+            </aoe_translationlogger_resource>
+            <core>
+                <rewrite>
+                    <translate>Aoe_TranslationLogger_Model_Translate</translate>
+                </rewrite>
+            </core>
+        </models>
+        <resources>
+            <aoe_translation_setup>
+                <setup>
+                    <module>Aoe_TranslationLogger</module>
+                </setup>
+            </aoe_translation_setup>
+        </resources>
+    </global>
 </config>
