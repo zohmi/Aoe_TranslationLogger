@@ -48,6 +48,15 @@ $table = $this->getConnection()
         'Translation'
     )
     ->addColumn(
+        'checksum',
+        Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        255,
+        [
+            'nullable' => false,
+        ],
+        'Checksum over module and text'
+    )
+    ->addColumn(
         'store_view',
         Varien_Db_Ddl_Table::TYPE_SMALLINT,
         null,
@@ -64,6 +73,17 @@ $table = $this->getConnection()
             'nullable' => false,
         ],
         'Shop Url'
+    )
+    ->addIndex(
+        $installer->getIdxName(
+            $this->getTable('aoe_translationlogger/translation_logging'),
+            ['checksum'],
+            Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE
+        ),
+        'checksum',
+        [
+            'type' => Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE
+        ]
     )
     ->setComment('Table to collect translations for easier editing');
 

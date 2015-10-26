@@ -35,6 +35,13 @@ class Aoe_TranslationLogger_Model_Translate extends Mage_Core_Model_Translate
         if ($this->_defaultHelper->isLoggingEnabled() && !$this->_defaultHelper->isAdmin()) {
             $text = array_shift($args);
 
+            if (is_string($text) && ''==$text
+                || is_null($text)
+                || is_bool($text) && false===$text
+                || is_object($text) && ''==$text->getText()) {
+                return '';
+            }
+
             if ($text instanceof Mage_Core_Model_Translate_Expr) {
                 $code = $text->getCode(self::SCOPE_SEPARATOR);
                 $module = $text->getModule();
@@ -42,11 +49,12 @@ class Aoe_TranslationLogger_Model_Translate extends Mage_Core_Model_Translate
                 $translated = $this->_getTranslatedString($text, $code);
             } else {
                 if (!empty($_REQUEST['theme'])) {
-                    $module = 'frontend/default/'.$_REQUEST['theme'];
+                    $module = 'frontend/default/' . $_REQUEST['theme'];
                 } else {
                     $module = 'frontend/default/default';
                 }
-                $code = $module.self::SCOPE_SEPARATOR.$text;
+
+                $code = $module . self::SCOPE_SEPARATOR . $text;
                 $translated = $this->_getTranslatedString($text, $code);
             }
 
@@ -55,6 +63,7 @@ class Aoe_TranslationLogger_Model_Translate extends Mage_Core_Model_Translate
                 ->setModule($module)
                 ->setText($text)
                 ->setTranslated($translated)
+                ->setChecksum(md5($module . $text))
                 ->setStoreView(Mage::app()->getStore()->getStoreId())
                 ->setUrl(Mage::app()->getStore()->getCurrentUrl(false))
                 ->save();

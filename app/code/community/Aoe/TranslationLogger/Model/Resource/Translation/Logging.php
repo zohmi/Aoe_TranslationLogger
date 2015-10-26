@@ -29,9 +29,6 @@ class Aoe_TranslationLogger_Model_Resource_Translation_Logging extends Mage_Core
      */
     public function save(Mage_Core_Model_Abstract $object)
     {
-        // define on-duplicate-key-update fields
-        $this->_fieldsForUpdate = ['module', 'text'];
-
         if ($object->isDeleted()) {
             return $this->delete($object);
         }
@@ -39,10 +36,9 @@ class Aoe_TranslationLogger_Model_Resource_Translation_Logging extends Mage_Core
         $this->_serializeFields($object);
         $this->_beforeSave($object);
 
-        $this->_getWriteAdapter()->insertOnDuplicate(
+        $this->_getWriteAdapter()->insertIgnore(
             $this->getMainTable(),
-            $this->_prepareDataForSave($object),
-            $this->_fieldsForUpdate
+            $this->_prepareDataForSave($object)
         );
 
         $this->unserializeFields($object);
