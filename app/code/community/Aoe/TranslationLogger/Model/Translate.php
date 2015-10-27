@@ -63,7 +63,7 @@ class Aoe_TranslationLogger_Model_Translate extends Mage_Core_Model_Translate
                 ->setModule($module)
                 ->setText($text)
                 ->setTranslated($translated)
-                ->setChecksum(md5($module . $text))
+                ->setChecksum(md5($code))
                 ->setStoreView(Mage::app()->getStore()->getStoreId())
                 ->setUrl(Mage::app()->getStore()->getCurrentUrl(false))
                 ->save();

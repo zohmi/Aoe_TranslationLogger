@@ -54,7 +54,7 @@ $table = $this->getConnection()
         [
             'nullable' => false,
         ],
-        'Checksum over module and text'
+        'Checksum over code'
     )
     ->addColumn(
         'store_view',
